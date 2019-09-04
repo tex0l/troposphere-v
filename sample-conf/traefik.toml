@@ -16,7 +16,7 @@ defaultEntryPoints = ["https","http"]
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
-domain = "rebours.me"
+domain = "my-awesome-app.org"
 watch = true
 exposedByDefault = false
 

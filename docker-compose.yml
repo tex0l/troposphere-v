@@ -2,7 +2,7 @@ version: '3'
 
 services:
   traefik:
-    image: traefik:1.7
+    image: traefik:1.7.14
     restart: always
     ports:
       - 80:80
@@ -19,4 +19,9 @@ services:
     restart: always
     networks:
       - web
+    labels:
+      - "traefik.enable=true"
 
+networks:
+  web:
+    external: true
