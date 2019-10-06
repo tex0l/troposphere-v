@@ -24,7 +24,7 @@ services:
       - "traefik.http.routers.ghost-tls.rule=Host(`blog.${DOMAIN}`)"
       - "traefik.http.routers.ghost-tls.entrypoints=web-secure"
       - "traefik.http.routers.ghost-tls.tls=true"
-      - "traefik.http.routers.ghost.tls.certresolver=tls-resolver"
+      - "traefik.http.routers.ghost-tls.tls.certresolver=tls-resolver"
 
     networks:
       - web
