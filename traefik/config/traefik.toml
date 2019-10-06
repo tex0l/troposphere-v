@@ -19,7 +19,3 @@
 
 [accessLog]
   filePath = "/logs/access.log"
-
-[api]
-  insecure = true
-  dashboard = true
