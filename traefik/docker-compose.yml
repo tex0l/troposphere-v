@@ -21,10 +21,10 @@ services:
       - "--log.level=DEBUG"
       - "--accesslog=true"
       - "--accesslog.filepath=/logs/access.log"
-      - "--certificatesresolvers.tlschallenge.acme.tlschallenge=true"
-      #- "--certificatesresolvers.mytlschallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-      - "--certificatesresolvers.tlschallenge.acme.email=${ACME_EMAIL}"
-      - "--certificatesresolvers.tlschallenge.acme.storage=/acme.json"
+      - "--certificatesresolvers.tls-resolver.acme.tlschallenge=true"
+      #- "--certificatesresolvers.tls-resolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.tls-resolver.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.tls-resolver.acme.storage=/acme.json"
 
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
