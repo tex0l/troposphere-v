@@ -1,0 +1,4 @@
+[http.middlewares]
+  [http.middlewares.sts-middleware.headers]
+    FrameDeny = true
+    SSLRedirect = true

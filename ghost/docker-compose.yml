@@ -1,0 +1,47 @@
+version: '3.3'
+
+services:
+  ghost:
+    image: ghost:2.31-alpine
+    restart: always
+    depends_on:
+      - db
+    volumes:
+       - "${VOLUMES_DIRECTORY:-/docker}/ghost/ghost/content/:/var/lib/ghost/content"
+    environment:
+      # see https://docs.ghost.org/docs/config#section-running-ghost-with-config-env-variables
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: $DATABASE_PASSWORD
+      database__connection__database: ghost
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.ghost.loadbalancer.server.port=2368"
+      - "traefik.http.routers.ghost.rule=Host(`blog.${DOMAIN}`)"
+      - "traefik.http.routers.ghost.entrypoints=web"
+      - "traefik.http.routers.ghost.middlewares=sts-middleware@file"
+      - "traefik.http.routers.ghost-tls.rule=Host(`blog.${DOMAIN}`)"
+      - "traefik.http.routers.ghost-tls.entrypoints=web-secure"
+      - "traefik.http.routers.ghost-tls.tls=true"
+
+    networks:
+      - web
+      - backend
+
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - "${VOLUMES_DIRECTORY:-/docker}/ghost/db/:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: $DATABASE_PASSWORD
+    networks:
+      - backend
+
+
+networks:
+  web:
+    external: true
+  backend:
+    internal: true

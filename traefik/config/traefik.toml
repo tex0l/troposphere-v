@@ -1,0 +1,25 @@
+[providers.docker]
+  endpoint = "unix:///var/run/docker.sock"
+  exposedByDefault = false
+
+[providers.file]
+  directory = "/dynamic-configuration/"
+  watch = true
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+
+  [entryPoints.web-secure]
+    address = ":443"
+
+[log]
+  filePath = "/logs/traefik.log"
+  level = "DEBUG"
+
+[accessLog]
+  filePath = "/logs/access.log"
+
+[api]
+  insecure = true
+  dashboard = true

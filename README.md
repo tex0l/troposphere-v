@@ -1,8 +1,11 @@
 # Troposphere-v
 
-Little personnal experiment.
+Little personal experiment.
 
-## Wish-list
+## How it works
+Each directory represents
+
+## TODO
 
 ### Front-end applications
 
@@ -15,4 +18,3 @@ Little personnal experiment.
 * [ ] LDAP
 * [ ] Secure backup
 * [ ] one-click backup restoration (as much as possible)
-* [ ] 
