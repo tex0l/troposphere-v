@@ -8,7 +8,7 @@ services:
       - 80:80
       - 443:443
     command:
-      #- "--log.level=DEBUG"
+      - "--log.level=DEBUG"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.file=true"
@@ -21,10 +21,10 @@ services:
       - "--log.level=DEBUG"
       - "--accesslog=true"
       - "--accesslog.filepath=/logs/access.log"
-      - "--certificatesresolvers.tls-resolver.acme.tlschallenge=true"
-      #- "--certificatesresolvers.tls-resolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
-      - "--certificatesresolvers.tls-resolver.acme.email=${ACME_EMAIL}"
-      - "--certificatesresolvers.tls-resolver.acme.storage=/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      #- "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=acme.json"
 
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
