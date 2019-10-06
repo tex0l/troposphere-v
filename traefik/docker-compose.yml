@@ -16,7 +16,7 @@ services:
       - "--providers.file.watch=true"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.web-secure.address=:443"
-      - "--log==true"
+      - "--log=true"
       - "--log.filepath=/logs/traefik.log"
       - "--log.level=DEBUG"
       - "--accesslog=true"
