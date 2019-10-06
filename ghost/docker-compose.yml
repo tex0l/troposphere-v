@@ -20,14 +20,10 @@ services:
       url: https://blog.$DOMAIN
     labels:
       - "traefik.enable=true"
-      - "traefik.http.services.ghost.loadbalancer.server.port=2368"
       - "traefik.http.routers.ghost.rule=Host(`blog.${DOMAIN}`)"
-      - "traefik.http.routers.ghost.entrypoints=web"
-#      - "traefik.http.routers.ghost.middlewares=sts-middleware@file"
-      - "traefik.http.routers.ghost-tls.rule=Host(`blog.${DOMAIN}`)"
-      - "traefik.http.routers.ghost-tls.entrypoints=web-secure"
-      - "traefik.http.routers.ghost-tls.tls=true"
-      - "traefik.http.routers.ghost-tls.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.ghost.entrypoints=web-secure"
+      - "traefik.http.routers.ghost.tls=true"
+      - "traefik.http.routers.ghost.tls.certresolver=letsencrypt"
 
     networks:
       - web
