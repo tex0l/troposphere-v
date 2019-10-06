@@ -11,6 +11,7 @@ services:
       - "--log.level=DEBUG"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=web"
       - "--providers.file=true"
       - "--providers.file.directory=/dynamic-configuration/"
       - "--providers.file.watch=true"
