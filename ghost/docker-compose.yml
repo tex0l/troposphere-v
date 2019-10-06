@@ -17,7 +17,7 @@ services:
       database__connection__password: $DATABASE_PASSWORD
       database__connection__database: ghost
       logging__level: debug
-      url: blog.$DOMAIN
+      url: https://blog.$DOMAIN
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.ghost.loadbalancer.server.port=2368"
