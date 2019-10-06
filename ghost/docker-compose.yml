@@ -8,6 +8,7 @@ services:
       - db
     volumes:
        - "${VOLUMES_DIRECTORY:-/docker}/ghost/ghost/content/:/var/lib/ghost/content"
+       - "${VOLUMES_DIRECTORY:-/docker}/logs/ghost/:/var/lib/ghost/content/logs"
     environment:
       # see https://docs.ghost.org/docs/config#section-running-ghost-with-config-env-variables
       database__client: mysql
@@ -15,14 +16,17 @@ services:
       database__connection__user: root
       database__connection__password: $DATABASE_PASSWORD
       database__connection__database: ghost
+      logging__level: debug
+      url: blog.$DOMAIN
     labels:
       - "traefik.enable=true"
       - "traefik.http.services.ghost.loadbalancer.server.port=2368"
       - "traefik.http.routers.ghost.rule=Host(`blog.${DOMAIN}`)"
       - "traefik.http.routers.ghost.entrypoints=web"
-      - "traefik.http.routers.ghost.middlewares=sts-middleware@file"
+#      - "traefik.http.routers.ghost.middlewares=sts-middleware@file"
       - "traefik.http.routers.ghost-tls.rule=Host(`blog.${DOMAIN}`)"
       - "traefik.http.routers.ghost-tls.entrypoints=web-secure"
+      - "traefik.http.routers.ghost-tls.tls=true"
       - "traefik.http.routers.ghost-tls.tls.certresolver=letsencrypt"
 
     networks:
