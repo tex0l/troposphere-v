@@ -19,3 +19,11 @@
 
 [accessLog]
   filePath = "/logs/access.log"
+
+[certificatesResolvers]
+  [certificatesResolvers.tls-resolver]
+    [certificatesResolvers.tls-resolver.acme]
+      tlschallenge = true
+      #caserver="https://acme-staging-v02.api.letsencrypt.org/directory"
+      email= "email@domain.com"
+      storage="/acme.json"
