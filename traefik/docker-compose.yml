@@ -29,7 +29,7 @@ services:
 
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "${TRAEFIK_CONFIG}/dynamic-configuration/:/dynamic-configuration/"
+      - "./dynamic-configuration/:/dynamic-configuration/:ro"
       - "${VOLUMES_DIRECTORY:-/docker}/traefik/acme.json:/acme.json"
       - "${VOLUMES_DIRECTORY:-/docker}/logs/traefik/:/logs/"
     container_name: traefik

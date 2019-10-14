@@ -21,6 +21,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ghost.rule=Host(`blog.${DOMAIN}`)"
+      - "traefik.http.routers.ghost.middlewares=sts-middleware@file"
       - "traefik.http.routers.ghost.entrypoints=web-secure"
       - "traefik.http.routers.ghost.tls=true"
       - "traefik.http.routers.ghost.tls.certresolver=letsencrypt"

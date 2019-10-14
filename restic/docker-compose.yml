@@ -1,0 +1,39 @@
+version: '3.3'
+
+services:
+  restic-backup:
+    build: ./image
+    restart: always
+    volumes:
+      - "${VOLUMES_DIRECTORY:-/docker}:/data:ro"
+      - "../:/scripts:ro"
+      - "${VOLUMES_DIRECTORY:-/docker}/logs/restic:/var/log"
+    container_name: restic
+    entrypoint: "/start-cron.sh"
+    command: tail -fn0 /var/log/cron.log
+    environment:
+      - HOSTNAME=$HOSTNAME
+      - B2_ACCOUNT_ID=$B2_ACCOUNT_ID
+      - B2_ACCOUNT_KEY=$B2_ACCOUNT_KEY
+      - RESTIC_PASSWORD=$RESTIC_PASSWORD
+      - B2_BUCKET=$B2_BUCKET
+      - BACKUP_CRON=0 2 */1 * *
+      - RESTIC_JOB_ARGS=--verbose
+      - RESTIC_FORGET_POLICY=--keep-yearly 5 --keep-monthly 12 --keep-weekly 26 --keep-daily 30 --keep-last 5
+  restic-restore:
+    build: ./image
+    restart: always
+    volumes:
+      - "${VOLUMES_DIRECTORY:-/docker}:/data:ro"
+      - "../:/scripts:ro"
+      - "${VOLUMES_DIRECTORY:-/docker}/logs/restic:/var/log"
+    container_name: restic
+    entrypoint: "/start-restore.sh"
+    command: tail -fn0 /var/log/restore.log
+    environment:
+      - PATHS_TO_RESTORE=/data/ghost
+      - B2_ACCOUNT_ID=$B2_ACCOUNT_ID
+      - B2_ACCOUNT_KEY=$B2_ACCOUNT_KEY
+      - RESTIC_PASSWORD=$RESTIC_PASSWORD
+      - B2_BUCKET=$B2_BUCKET
+      - RESTIC_JOB_ARGS=--verbose
