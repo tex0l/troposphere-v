@@ -28,7 +28,7 @@ if [ $status != 0 ]; then
   log "Restic repository '${repository}' does not exist. Running restic init."
   restic -r "${repository}" init
 
-  init_status=$?n
+  init_status=$?
   log "Repo init status ${init_status}"
 
   if [ $init_status != 0 ]; then
