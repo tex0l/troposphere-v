@@ -9,7 +9,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.hsts.rule=PathPrefix(`/`)"
       - "traefik.http.routers.hsts.middlewares=sts-middleware@file"
-      - "traefik.http.routers.ghost.entrypoints=web"
+      - "traefik.http.routers.hsts.entrypoints=web"
 
     networks:
       - web
