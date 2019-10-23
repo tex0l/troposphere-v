@@ -19,9 +19,10 @@ services:
       logging__level: debug
       url: https://blog.$DOMAIN
     labels:
+      - "traefik.http.middlewares.frame-same-origin.headers.customFrameOptionsValue=sameorigin"
       - "traefik.enable=true"
       - "traefik.http.routers.ghost.rule=Host(`blog.${DOMAIN}`)"
-      - "traefik.http.routers.ghost.middlewares=sts-middleware@file"
+      - "traefik.http.routers.ghost.middlewares=sts-middleware@file, frame-same-origin"
       - "traefik.http.routers.ghost.entrypoints=web-secure"
       - "traefik.http.routers.ghost.tls=true"
       - "traefik.http.routers.ghost.tls.certresolver=letsencrypt"
